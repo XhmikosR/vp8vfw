@@ -170,7 +170,7 @@ void config_reg_get(CONFIG * config)
 {
    HKEY hKey;
    DWORD size;
-   int i,j;
+   int i;
 
    RegOpenKeyEx(VP80_REG_KEY, VP80_REG_PARENT "\\" VP80_REG_CHILD, 0, KEY_READ, &hKey);
 
@@ -222,7 +222,7 @@ void config_reg_set(CONFIG * config)
 {
    HKEY hKey;
    DWORD dispo;
-   int i,j;
+   int i;
 
    if (RegCreateKeyEx(
          VP80_REG_KEY,
