@@ -1,0 +1,11 @@
+Tests For Release
+=================
+- Test video with following input formats:
+   - RGB888
+   - YV12
+   - RGB555
+- Test video which has odd pixel sizes
+- Test video with following output formats:
+   - RGB888
+   - YV12
+   - RGB555
