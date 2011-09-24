@@ -66,7 +66,6 @@ EXIT /B
 
 :SubInno
 ECHO.
-rem IF "%ARCH%" == "all" SET ARCH=
 TITLE Building vfw_vs2010 %~1 installer...
 "%InnoSetupPath%\iscc.exe" /Q "setup.iss" /D%~1Build
 IF %ERRORLEVEL% NEQ 0 (ECHO Build failed & GOTO END) ELSE (ECHO %~1 installer compiled successfully!)
