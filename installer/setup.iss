@@ -54,21 +54,28 @@ Compression=lzma2/ultra64
 ;5.01=XP for MSVC2010 builds, 5.0 for Win2K for MSVC2008 builds
 MinVersion=0,5.01
 
+
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
+
 
 [Messages]
 BeveledLabel={#app_name} v{#app_version}
 
+
 [Files]
 #ifdef x64Build
-Source: ..\Release\x64\vp8vfw.dll; DestDir: {sys}; Flags: promptifolder sharedfile ignoreversion uninsnosharedfileprompt
+Source: ..\Release\x64\vp8vfw.dll;   DestDir: {sys}; Flags: promptifolder sharedfile ignoreversion uninsnosharedfileprompt restartreplace
 #else
-Source: ..\Release\Win32\vp8vfw.dll; DestDir: {sys}; Flags: promptifolder sharedfile ignoreversion uninsnosharedfileprompt
+Source: ..\Release\Win32\vp8vfw.dll; DestDir: {sys}; Flags: promptifolder sharedfile ignoreversion uninsnosharedfileprompt restartreplace
 #endif
+Source: ..\bin\readme.txt;           DestDir: {app}; Flags: ignoreversion restartreplace
+Source: ..\LICENSE;                  DestDir: {app}; Flags: ignoreversion restartreplace
+
 
 [INI]
 Filename: "system.ini"; Section: "drivers32"; Key: "vidc.VP80"; String: "vp8vfw.dll"; Flags: uninsdeleteentry
+
 
 [Registry]
 Root: HKLM; SubKey: SYSTEM\CurrentControlSet\Control\MediaResources\icm\VIDC.VP80; ValueType: string; ValueName: Description;  ValueData: VP8 VFW Video Codec; Flags: uninsdeletevalue
@@ -79,10 +86,12 @@ Root: HKLM; SubKey: SOFTWARE\Microsoft\Windows NT\CurrentVersion\drivers32;     
 Root: HKCU; SubKey: Software\GNU;      ValueType: none; Flags: dontcreatekey uninsdeletekeyifempty
 Root: HKCU; SubKey: Software\GNU\vp80; ValueType: none; Flags: dontcreatekey uninsdeletekey
 
+
 ;[Icons]
 ;Name: {group}\Configure VP8 VFW;                 Filename: {syswow64}\rundll32.exe; Parameters: """{syswow64}\vp8vfw.dll"",Configure"; WorkingDir: {syswow64}; Comment: Configure VP8 VFW
 ;Name: {group}\{cm:UninstallProgram,{#app_name}}; Filename: {uninstallexe}; Comment: {cm:UninstallProgram,{#app_name}}; WorkingDir: {app}
 ;Name: {group}\{cm:ProgramOnTheWeb,{#app_name}};  Filename: {#WEBPAGE}
+
 
 [Run]
 #ifdef x64Build
@@ -91,6 +100,7 @@ Filename: {sys}\rundll32.exe; Description: Configure VP8 VFW; Parameters: """{sy
 Filename: {syswow64}\rundll32.exe; Description: Configure VP8 VFW; Parameters: """{syswow64}\vp8vfw.dll"",Configure"; WorkingDir: {syswow64}; Flags: postinstall nowait skipifsilent unchecked
 #endif
 Filename: {#WEBPAGE}; Description: Visit Webpage; Flags: nowait postinstall skipifsilent shellexec unchecked
+
 
 [Code]
 procedure CurPageChanged(CurPageID: Integer);
