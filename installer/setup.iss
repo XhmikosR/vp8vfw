@@ -1,7 +1,7 @@
 #define app_version   "1.2.0"
 #define app_name      "VP8 Video For Windows codec"
 #define app_copyright "Copyright © Optima SC Inc. 2011"
-#define WEBPAGE       "http://www.optimasc.com/products/vp8vfw/index.html"
+#define app_webpage   "http://www.optimasc.com/products/vp8vfw/index.html"
 
 ;#define x64Build
 
@@ -30,9 +30,9 @@ AppVerName={#app_name} {#app_version}
 AppCopyright={#app_copyright}
 AppContact=info@optimasc.com
 AppPublisher=Optima SC, Inc.
-AppPublisherURL={#WEBPAGE}
-AppSupportURL={#WEBPAGE}
-AppUpdatesURL={#WEBPAGE}
+AppPublisherURL={#app_webpage}
+AppSupportURL={#app_webpage}
+AppUpdatesURL={#app_webpage}
 VersionInfoCompany=Optima SC Inc.
 VersionInfoCopyright={#app_copyright}
 VersionInfoDescription={#app_name} {#app_version} Setup
@@ -90,7 +90,7 @@ Root: HKCU; SubKey: Software\GNU\vp80; ValueType: none; Flags: dontcreatekey uni
 ;[Icons]
 ;Name: {group}\Configure VP8 VFW;                 Filename: {syswow64}\rundll32.exe; Parameters: """{syswow64}\vp8vfw.dll"",Configure"; WorkingDir: {syswow64}; Comment: Configure VP8 VFW
 ;Name: {group}\{cm:UninstallProgram,{#app_name}}; Filename: {uninstallexe}; Comment: {cm:UninstallProgram,{#app_name}}; WorkingDir: {app}
-;Name: {group}\{cm:ProgramOnTheWeb,{#app_name}};  Filename: {#WEBPAGE}
+;Name: {group}\{cm:ProgramOnTheWeb,{#app_name}};  Filename: {#app_webpage}
 
 
 [Run]
@@ -99,7 +99,7 @@ Filename: {sys}\rundll32.exe; Description: Configure VP8 VFW; Parameters: """{sy
 #else
 Filename: {syswow64}\rundll32.exe; Description: Configure VP8 VFW; Parameters: """{syswow64}\vp8vfw.dll"",Configure"; WorkingDir: {syswow64}; Flags: postinstall nowait skipifsilent unchecked
 #endif
-Filename: {#WEBPAGE}; Description: Visit Webpage; Flags: nowait postinstall skipifsilent shellexec unchecked
+Filename: {#app_webpage}; Description: Visit app_webpage; Flags: nowait postinstall skipifsilent shellexec unchecked
 
 
 [Code]
