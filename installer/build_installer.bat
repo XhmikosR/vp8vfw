@@ -4,7 +4,7 @@ CD /D %~dp0
 
 REM You can set here the Inno Setup path if for example you have Inno Setup Unicode
 REM installed and you want to use the ANSI Inno Setup which is in another location
-SET "InnoSetupPath=H:\progs\thirdparty\isetup-5.4.2"
+SET "InnoSetupPath=H:\progs\thirdparty\isetup"
 
 
 rem Check for the help switches
@@ -43,7 +43,7 @@ CALL :SubGetInnoSetupPath
 
 IF NOT EXIST %InnoSetupPath% (
   ECHO. & ECHO.
-  ECHO Inno Setup not found!
+  CALL :SUBMSG "ERROR" "Inno Setup not found!"
   GOTO END
 )
 
@@ -57,7 +57,7 @@ IF "%ARCH%" == "x86" GOTO END
 IF "%ARCH%" == "x86" GOTO END
 CALL :SubInno x64
 
- 
+
  :END
 ECHO. & ECHO.
 ENDLOCAL
@@ -68,7 +68,11 @@ EXIT /B
 ECHO.
 TITLE Building vfw_vs2010 %~1 installer...
 "%InnoSetupPath%\iscc.exe" /Q "setup.iss" /D%~1Build
-IF %ERRORLEVEL% NEQ 0 (ECHO Build failed & GOTO END) ELSE (ECHO %~1 installer compiled successfully!)
+IF %ERRORLEVEL% NEQ 0 (
+  CALL :SUBMSG "ERROR" "Build failed!
+) ELSE (
+  CALL :SUBMSG "INFO" "%~1 installer compiled successfully!
+)
 EXIT /B
 
 
@@ -106,3 +110,15 @@ ECHO Executing "%~nx0" will use the defaults: "%~nx0 all"
 ECHO.
 ENDLOCAL
 EXIT /B
+
+
+:SUBMSG
+ECHO. & ECHO ______________________________
+ECHO [%~1] %~2
+ECHO ______________________________ & ECHO.
+IF /I "%~1" == "ERROR" (
+  PAUSE
+  EXIT
+) ELSE (
+  EXIT /B
+)
