@@ -78,4 +78,9 @@
     </None>
     <None Include="LICENSE" />
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="src\vp8vfw.dll.manifest">
+      <Filter>Resource Files</Filter>
+    </Manifest>
+  </ItemGroup>
 </Project>
