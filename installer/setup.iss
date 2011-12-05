@@ -3,25 +3,13 @@
 #define app_copyright "Copyright © Optima SC Inc. 2011"
 #define app_webpage   "http://www.optimasc.com/products/vp8vfw/index.html"
 
-;#define x64Build
-
 #if VER < 0x05040200
   #error Update your Inno Setup version
 #endif
 
 
 [Setup]
-#ifdef x64Build
-AppId={{C67AFB68-825A-4473-AC0A-8DA5BC3D14D3}
-UninstallDisplayName={#app_name} {#app_version} (x64)
-OutputBaseFilename=vp8vfw-setup-{#app_version}-x64
-ArchitecturesAllowed=x64
-ArchitecturesInstallIn64BitMode=x64
-#else
-AppId={{0B7FDDF4-23B5-4119-A91A-EC01718DFDC8}
-UninstallDisplayName={#app_name} {#app_version}
-OutputBaseFilename=vp8vfw-setup-{#app_version}
-#endif
+AppId=vp8vfw
 AppName={#app_name}
 AppVersion={#app_version}
 AppVerName={#app_name} {#app_version}
@@ -39,24 +27,27 @@ VersionInfoVersion={#app_version}
 VersionInfoProductName={#app_name}
 VersionInfoProductVersion={#app_version}
 VersionInfoProductTextVersion={#app_version}
+UninstallDisplayName={#app_name} {#app_version}
 DefaultDirName={pf}\VP8 VFW
 DefaultGroupName=VP8 VFW
 InfoBeforeFile=..\bin\readme.txt
 OutputDir=.
+OutputBaseFilename=vp8vfw-setup-{#app_version}
 PrivilegesRequired=admin
 AllowNoIcons=yes
 DisableDirPage=yes
-DisableProgramGroupPage=yes
+DisableProgramGroupPage=auto
 DisableReadyPage=yes
 SolidCompression=yes
 Compression=lzma/ultra64
 InternalCompressLevel=max
-;5.01=XP for MSVC2010 builds, 5.0 for Win2K for MSVC2008 builds
-MinVersion=0,5.01
+MinVersion=0,5.01sp3
+ArchitecturesAllowed=x86 x64
+ArchitecturesInstallIn64BitMode=x64
 
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: en; MessagesFile: compiler:Default.isl
 
 
 [Messages]
@@ -64,11 +55,8 @@ BeveledLabel={#app_name} v{#app_version}
 
 
 [Files]
-#ifdef x64Build
-Source: ..\Release\x64\vp8vfw.dll;   DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace
-#else
-Source: ..\Release\Win32\vp8vfw.dll; DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace
-#endif
+Source: ..\Release\Win32\vp8vfw.dll; DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace 32bit
+Source: ..\Release\x64\vp8vfw.dll;   DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace 64bit; Check: Is64BitInstallMode()
 Source: ..\bin\readme.txt;           DestDir: {app}; Flags: ignoreversion restartreplace
 Source: ..\LICENSE;                  DestDir: {app}; Flags: ignoreversion restartreplace
 
@@ -78,26 +66,28 @@ FileName: {win}\system.ini; Section: drivers32; Key: VIDC.VP80; String: vp8vfw.d
 
 
 [Registry]
-Root: HKLM; SubKey: SYSTEM\CurrentControlSet\Control\MediaResources\icm\VIDC.VP80; ValueType: string; ValueName: Description;  ValueData: VP8 VFW Video Codec; Flags: uninsdeletevalue
-Root: HKLM; SubKey: SYSTEM\CurrentControlSet\Control\MediaResources\icm\VIDC.VP80; ValueType: string; ValueName: Driver;       ValueData: vp8vfw.dll;          Flags: uninsdeletevalue
-Root: HKLM; SubKey: SYSTEM\CurrentControlSet\Control\MediaResources\icm\VIDC.VP80; ValueType: string; ValueName: FriendlyName; ValueData: VP8;                 Flags: uninsdeletevalue
-Root: HKLM; SubKey: SOFTWARE\Microsoft\Windows NT\CurrentVersion\drivers.desc;     ValueType: string; ValueName: vp8vfw.dll;   ValueData: VP8 VFW Video Codec; Flags: uninsdeletevalue
-Root: HKLM; SubKey: SOFTWARE\Microsoft\Windows NT\CurrentVersion\Drivers32;        ValueType: string; ValueName: VIDC.VP80;    ValueData: vp8vfw.dll;          Flags: uninsdeletevalue
+Root: HKLM;   SubKey: SYSTEM\CurrentControlSet\Control\MediaResources\icm\VIDC.VP80; ValueType: string; ValueName: Description;  ValueData: VP8 VFW Video Codec; Flags: uninsdeletevalue
+Root: HKLM;   SubKey: SYSTEM\CurrentControlSet\Control\MediaResources\icm\VIDC.VP80; ValueType: string; ValueName: Driver;       ValueData: vp8vfw.dll;          Flags: uninsdeletevalue
+Root: HKLM;   SubKey: SYSTEM\CurrentControlSet\Control\MediaResources\icm\VIDC.VP80; ValueType: string; ValueName: FriendlyName; ValueData: VP8;                 Flags: uninsdeletevalue
+Root: HKLM;   SubKey: SOFTWARE\Microsoft\Windows NT\CurrentVersion\drivers.desc;     ValueType: string; ValueName: vp8vfw.dll;   ValueData: VP8 VFW Video Codec; Flags: uninsdeletevalue
+Root: HKLM;   SubKey: SOFTWARE\Microsoft\Windows NT\CurrentVersion\Drivers32;        ValueType: string; ValueName: VIDC.VP80;    ValueData: vp8vfw.dll;          Flags: uninsdeletevalue
+Root: HKLM64; Subkey: SOFTWARE\Microsoft\Windows NT\CurrentVersion\drivers.desc;     ValueType: string; ValueName: vp8vfw.dll;   ValueData: VP8 VFW Video Codec; Flags: uninsdeletevalue; Check: Is64BitInstallMode()
+Root: HKLM64; Subkey: SOFTWARE\Microsoft\Windows NT\CurrentVersion\Drivers32;        ValueType: string; ValueName: VIDC.VP80;    ValueData: vp8vfw.dll;          Flags: uninsdeletevalue; Check: Is64BitInstallMode()
 
 
-;[Icons]
-;Name: {group}\Configure VP8 VFW;                 Filename: {syswow64}\rundll32.exe; Parameters: """{syswow64}\vp8vfw.dll"",Configure"; WorkingDir: {syswow64}; Comment: Configure VP8 VFW
-;Name: {group}\{cm:UninstallProgram,{#app_name}}; Filename: {uninstallexe}; Comment: {cm:UninstallProgram,{#app_name}}; WorkingDir: {app}
-;Name: {group}\{cm:ProgramOnTheWeb,{#app_name}};  Filename: {#app_webpage}
+[Icons]
+Name: {group}\Configure VP8 VFW;                 Filename: {sys}\rundll32.exe; Parameters: """{sys}\vp8vfw.dll"",Configure"; WorkingDir: {sys}; Comment: Configure VP8 VFW
+Name: {group}\{cm:ProgramOnTheWeb,{#app_name}};  Filename: {#app_webpage}
+Name: {group}\{cm:UninstallProgram,{#app_name}}; Filename: {uninstallexe}; Comment: {cm:UninstallProgram,{#app_name}}; WorkingDir: {app}
 
 
 [Run]
-#ifdef x64Build
-Filename: {sys}\rundll32.exe;      Description: Configure VP8 VFW; Parameters: """{sys}\vp8vfw.dll"",Configure";      WorkingDir: {sys};      Flags: postinstall nowait skipifsilent unchecked
-#else
-Filename: {syswow64}\rundll32.exe; Description: Configure VP8 VFW; Parameters: """{syswow64}\vp8vfw.dll"",Configure"; WorkingDir: {syswow64}; Flags: postinstall nowait skipifsilent unchecked
-#endif
-Filename: {#app_webpage};          Description: Visit webpage;     Flags: nowait postinstall skipifsilent shellexec unchecked
+Filename: {sys}\rundll32.exe; Description: Configure VP8 VFW; Parameters: """{sys}\vp8vfw.dll"",Configure"; WorkingDir: {sys}; Flags: postinstall nowait skipifsilent unchecked
+Filename: {#app_webpage};     Description: Visit webpage;     Flags: nowait postinstall skipifsilent shellexec unchecked
+
+
+[UninstallDelete]
+Type: dirifempty; Name: {app}
 
 
 [Code]
@@ -110,13 +100,58 @@ begin
 end;
 
 
+function IsOldBuildInstalled(iRootKey: Integer; sUnisKey: String): Boolean;
+begin
+  if RegKeyExists(iRootKey, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' + sUnisKey) then begin
+    Log('Custom Code: The old build is installed');
+    Result := True;
+  end
+  else begin
+    Log('Custom Code: The old build is NOT installed');
+    Result := False;
+  end;
+end;
+
+
+function UninstallOldVersion(iRootKey: Integer; sUnisKey: String): Integer;
+var
+  iResultCode: Integer;
+  sUnInstallString: String;
+begin
+// Return Values:
+// 0 - no idea
+// 1 - can't find the registry key (probably no previous version installed)
+// 2 - uninstall string is empty
+// 3 - error executing the UnInstallString
+// 4 - successfully executed the UnInstallString
+
+  // default return value
+  Result := 0;
+
+  sUnInstallString := '';
+
+  // Get the uninstall string of the old build
+  if RegQueryStringValue(iRootKey, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' + sUnisKey, 'UninstallString', sUnInstallString) then begin
+    if sUnInstallString <> '' then begin
+      sUnInstallString := RemoveQuotes(sUnInstallString);
+      if Exec(sUnInstallString, '/SILENT /VERYSILENT /NORESTART /SUPPRESSMSGBOXES','', SW_HIDE, ewWaitUntilTerminated, iResultCode) then begin
+        Result := 4;
+        Sleep(200);
+      end else
+        Result := 3;
+    end else
+      Result := 2;
+  end else
+    Result := 1;
+end;
+
+
 function ShouldSkipPage(PageID: Integer): Boolean;
 begin
   if IsUpgrade() then begin
     Case PageID of
-      // Hide the license page
+      // Hide the InfoBefore page
       wpInfoBefore: Result := True;
-      wpReady: Result := True;
     else
       Result := False;
     end;
@@ -129,11 +164,26 @@ begin
   if IsUpgrade() and (CurPageID = wpWelcome) then
     WizardForm.NextButton.Caption := SetupMessage(msgButtonInstall)
   else if CurPageID = wpInfoBefore then
+    WizardForm.NextButton.Caption := SetupMessage(msgButtonNext)
+  else if CurPageID = wpSelectProgramGroup then
     WizardForm.NextButton.Caption := SetupMessage(msgButtonInstall)
   else if CurPageID = wpFinished then
     WizardForm.NextButton.Caption := SetupMessage(msgButtonFinish)
   else if IsUpgrade() then
     WizardForm.NextButton.Caption := SetupMessage(msgButtonNext);
+end;
+
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if (CurStep = ssInstall) then begin
+    if IsWin64 then begin
+      if IsOldBuildInstalled(HKLM64, '{C67AFB68-825A-4473-AC0A-8DA5BC3D14D3}_is1') then
+        UninstallOldVersion(HKLM64, '{C67AFB68-825A-4473-AC0A-8DA5BC3D14D3}_is1');
+    end;
+    if IsOldBuildInstalled(HKLM32, '{0B7FDDF4-23B5-4119-A91A-EC01718DFDC8}_is1') then
+      UninstallOldVersion(HKLM32, '{0B7FDDF4-23B5-4119-A91A-EC01718DFDC8}_is1');
+  end;
 end;
 
 
