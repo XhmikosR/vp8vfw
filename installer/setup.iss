@@ -148,14 +148,9 @@ end;
 
 function ShouldSkipPage(PageID: Integer): Boolean;
 begin
-  if IsUpgrade() then begin
-    Case PageID of
-      // Hide the InfoBefore page
-      wpInfoBefore: Result := True;
-    else
-      Result := False;
-    end;
-  end;
+  // Hide the InfoBefore page if IsUpgrade()
+  if IsUpgrade() and (PageID = wpInfoBefore) then
+    Result := True;
 end;
 
 
