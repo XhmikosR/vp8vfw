@@ -190,10 +190,10 @@ extern "C" {
      * time stamp) order. Frames produced will always be in PTS (presentation
      * time stamp) order.
      * If the decoder is configured with VPX_CODEC_USE_INPUT_FRAGMENTS enabled,
-     * data and data_sz can contain a fragment of the encoded frame. Fragment #n
-     * must contain at least partition #n, but can also contain subsequent
-     * partitions (#n+1 - #n+i), and if so, fragments #n+1, .., #n+i must be
-     * empty. When no more data is available, this function should be called
+     * data and data_sz can contain a fragment of the encoded frame. Fragment
+     * \#n must contain at least partition \#n, but can also contain subsequent
+     * partitions (\#n+1 - \#n+i), and if so, fragments \#n+1, .., \#n+i must
+     * be empty. When no more data is available, this function should be called
      * with NULL as data and 0 as data_sz. The memory passed to this function
      * must be available until the frame has been decoded.
      *
@@ -326,8 +326,4 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
-#if !defined(VPX_CODEC_DISABLE_COMPAT) || !VPX_CODEC_DISABLE_COMPAT
-#include "vpx_decoder_compat.h"
 #endif
