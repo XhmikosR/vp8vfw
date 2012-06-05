@@ -3,8 +3,8 @@
 #define app_copyright "Copyright © Optima SC Inc. 2011"
 #define app_webpage   "http://www.optimasc.com/products/vp8vfw/index.html"
 
-#if VER < 0x05040200
-  #error Update your Inno Setup version
+#if VER < EncodeVer(5,5,0)
+  #error Update your Inno Setup version (5.5.0 or newer)
 #endif
 
 
@@ -41,7 +41,7 @@ DisableReadyPage=yes
 SolidCompression=yes
 Compression=lzma/ultra64
 InternalCompressLevel=max
-MinVersion=0,5.01sp3
+MinVersion=5.01sp3
 ArchitecturesAllowed=x86 x64
 ArchitecturesInstallIn64BitMode=x64
 
