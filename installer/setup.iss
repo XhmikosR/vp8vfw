@@ -3,8 +3,8 @@
 #define app_copyright "Copyright © Optima SC Inc. 2011"
 #define app_webpage   "http://www.optimasc.com/products/vp8vfw/index.html"
 
-#if VER < EncodeVer(5,5,0)
-  #error Update your Inno Setup version (5.5.0 or newer)
+#if VER < EncodeVer(5,5,1)
+  #error Update your Inno Setup version (5.5.1 or newer)
 #endif
 
 
