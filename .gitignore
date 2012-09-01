@@ -1,0 +1,9 @@
+/*.opensdf
+/*.sdf
+/*.suo
+/*.user
+/Debug
+/installer/vp8vfw-setup-*.exe
+/ipch
+/Release
+/src/*.aps
