@@ -2,8 +2,7 @@
 /*.sdf
 /*.suo
 /*.user
-/Debug
+/bin
 /installer/vp8vfw-setup-*.exe
 /ipch
-/Release
 /src/*.aps

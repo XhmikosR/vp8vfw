@@ -92,8 +92,8 @@ EXIT /B
 
 :SUBMSVC
 ECHO.
-TITLE Building vfw_vs2010 - %~1 "%~2|%~3"...
-devenv /nologo vfw_vs2010.sln /%~1 "%~2|%~3"
+TITLE Building vp8vfw - %~1 "%~2|%~3"...
+devenv /nologo vp8vfw.sln /%~1 "%~2|%~3"
 IF %ERRORLEVEL% NEQ 0 CALL :SUBMSG "ERROR" "Compilation failed!"
 EXIT /B
 

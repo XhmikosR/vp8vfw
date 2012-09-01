@@ -20,7 +20,7 @@ EXIT /B
 
 :SubInno
 ECHO.
-TITLE Building vfw_vs2010 installer...
+TITLE Building vp8vfw installer...
 "%InnoSetupPath%\ISCC.exe" /Q "setup.iss"
 IF %ERRORLEVEL% NEQ 0 (GOTO EndWithError) ELSE (ECHO Installer compiled successfully!)
 EXIT /B
@@ -55,7 +55,7 @@ EXIT /B
 
 
 :EndWithError
-Title Compiling PerfmonBar [ERROR]
+TITLE Building vp8vfw installer [ERROR]
 ECHO. & ECHO.
 ECHO **ERROR: Build failed and aborted!**
 PAUSE

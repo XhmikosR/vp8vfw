@@ -30,7 +30,7 @@ VersionInfoProductTextVersion={#app_version}
 UninstallDisplayName={#app_name} {#app_version}
 DefaultDirName={pf}\VP8 VFW
 DefaultGroupName=VP8 VFW
-InfoBeforeFile=..\bin\readme.txt
+InfoBeforeFile=..\readme.txt
 OutputDir=.
 OutputBaseFilename=vp8vfw-setup-{#app_version}
 PrivilegesRequired=admin
@@ -55,10 +55,10 @@ BeveledLabel={#app_name} v{#app_version}
 
 
 [Files]
-Source: ..\Release\Win32\vp8vfw.dll; DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace 32bit
-Source: ..\Release\x64\vp8vfw.dll;   DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace 64bit; Check: Is64BitInstallMode()
-Source: ..\bin\readme.txt;           DestDir: {app}; Flags: ignoreversion restartreplace
-Source: ..\LICENSE;                  DestDir: {app}; Flags: ignoreversion restartreplace
+Source: ..\bin\Release\Win32\vp8vfw.dll; DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace 32bit
+Source: ..\bin\Release\x64\vp8vfw.dll;   DestDir: {sys}; Flags: sharedfile ignoreversion uninsnosharedfileprompt restartreplace 64bit; Check: Is64BitInstallMode()
+Source: ..\LICENSE;                      DestDir: {app}; Flags: ignoreversion restartreplace
+Source: ..\readme.txt;                   DestDir: {app}; Flags: ignoreversion restartreplace
 
 
 [INI]
